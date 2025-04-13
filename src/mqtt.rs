@@ -1,4 +1,4 @@
-use futures_util::{FutureExt, StreamExt, TryFutureExt};
+use futures_util::StreamExt;
 use paho_mqtt::{AsyncClient, CreateOptionsBuilder, Message};
 use std::env;
 
@@ -17,16 +17,32 @@ impl ClientConfig {
     }
 }
 
+/// Use this function to connect the client to the MQTT broker. The client must be instantiated
+/// before calling this function.
+pub async fn connect_client(client: &AsyncClient) -> anyhow::Result<()> {
+    // Set up the connection options and then connect
+    let connect_options = paho_mqtt::ConnectOptionsBuilder::new()
+        .keep_alive_interval(std::time::Duration::from_secs(60))
+        .clean_session(true)
+        .finalize();
+
+    client
+        .connect(connect_options)
+        .await
+        .map_err(|e| anyhow::anyhow!("Failed to connect to MQTT server: {}", e))
+        .map(|_| ())
+}
+
 /// Creates a new instance of the paho_mqtt client.
 pub fn build_client(config: ClientConfig) -> anyhow::Result<AsyncClient> {
     // Set up the MQTT client options.
     // TODO - add TLS support, add username/password support
-    let options = CreateOptionsBuilder::new()
+    let create_options = CreateOptionsBuilder::new()
         .server_uri(format!("{}:{}", config.host, config.port))
         .client_id(env!("CARGO_PKG_NAME"))
         .finalize();
 
-    paho_mqtt::AsyncClient::new(options)
+    paho_mqtt::AsyncClient::new(create_options)
         .map_err(|e| anyhow::anyhow!("Failed to create MQTT client: {}", e))
 }
 
