@@ -31,8 +31,6 @@ fn load_config_file() {
     #[allow(deprecated)]
     let some_config_file = home_dir().map(|path| path.join(CONFIG_FILE_NAME));
 
-    println!("Config file path: {:?}", some_config_file);
-
     // If the config file exists, load the environment variables from it
     if let Some(config_file) = some_config_file {
         dotenvy::from_path(&config_file).ok();
