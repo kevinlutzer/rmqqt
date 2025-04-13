@@ -3,10 +3,7 @@ use cli::{Cli, Commands};
 use mqtt::{build_client, connect_client, publish, subscribe, ClientConfig};
 
 #[allow(deprecated)]
-use std::{
-    env::{self, home_dir},
-    process::exit,
-};
+use std::{env::home_dir, process::exit};
 use tokio::main;
 
 pub mod cli;
