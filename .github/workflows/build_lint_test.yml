@@ -1,0 +1,30 @@
+name: Build Lint and Test the Rust Application
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Clippy
+      run: cargo clippy -- -D warnings
+
+    - name: Format Check
+      run: cargo fmt --check
+
+    - name: Build
+      run: cargo build
