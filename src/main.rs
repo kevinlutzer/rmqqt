@@ -52,10 +52,6 @@ async fn main() {
         exit(ERR_PARSING_ARGS);
     });
 
-    for (key, value) in env::vars() {
-        println!("{} = {}", key, value);
-    }
-
     let config = ClientConfig::new(cli.host, cli.port);
     let mut client = build_client(config).unwrap_or_else(|e| {
         eprintln!("Error creating MQTT client: {}", e);
