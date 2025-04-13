@@ -1,6 +1,7 @@
 # rmqtt
 
-A compact rust CLI tool for publishing and subscribing to MQTT messages
+A compact rust CLI tool for publishing and subscribing to MQTT messages. The binary supports both the v5 and v3.1 versions
+of the MQTT protocol.
 
 ## Setup
 
