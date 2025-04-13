@@ -29,10 +29,7 @@ async fn main() {
     });
 
     // Build Client Config and the MQTT client used
-    let config = ClientConfig::new(
-        cli.host,
-        cli.port,
-    );
+    let config = ClientConfig::new(cli.host, cli.port);
 
     let mut client = build_client(config).unwrap_or_else(|e| {
         eprintln!("Error creating MQTT client: {}", e);
