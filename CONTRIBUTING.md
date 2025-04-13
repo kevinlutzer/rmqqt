@@ -1,6 +1,7 @@
 # Contributing to rmqqt
 
-Thanks for your interest in contributing to this project! Whether it's fixing a bug, adding a feature, improving documentation, or asking a question — you're welcome here.
+Thanks for your interest in contributing to this project! Whether it's fixing a bug, adding a feature, improving
+ documentation, or asking a question — you're welcome here.
 
 ## 📋 How to Contribute
 
