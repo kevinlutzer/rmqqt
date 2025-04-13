@@ -14,28 +14,25 @@ pub enum QoS {
 #[command(
     name = "rmqtt",
     version,
-    author,
+    author = "Kevin Lutzer",
     about = "Send and subscribe to MQTT messages"
 )]
 pub struct Cli {
     /// Host of the MQTT broker. This can be either a hostname or an IP address. This argument
     /// overides the .rmqqtconfig file's MQTT_HOST setting.
-    #[arg(long, default_value_t = String::from("localhost"))]
+    #[arg(long, env = "MQTT_HOST")]
     pub host: String,
 
     /// Port of the MQTT broker. This is usually 1883 for unencrypted connections and 8883 for TLS connections.
     /// This argument overides the .rmqqtconfig file's MQTT_PORT setting.
-    #[arg(short, long, default_value_t = 1883)]
+    #[arg(short, long, env = "MQTT_PORT")]
     pub port: u16,
 
-    /// Topic to publish to or subscribe from.
-    #[arg(long, short, default_value_t = String::from("test/topic"))]
+    /// Topic to publish to or subscribe from. This argument overrides the .rmqqtconfig file's MQTT_TOPIC setting.
+    #[arg(long, short, env = "MQTT_TOPIC")]
     pub topic: String,
 
     /// QOS is the level of guarantee that the message will be delivered. The levels are:
-    /// 0 - At most once (fire and forget)
-    /// 1 - At least once (acknowledged)
-    /// 2 - Exactly once (guaranteed delivery)
     #[arg(long, short, default_value_t = QoS::AtMostOnce, value_enum)]
     pub qos: QoS,
 

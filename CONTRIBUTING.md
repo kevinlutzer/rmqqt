@@ -1,4 +1,4 @@
-# Contributing to rmqqt
+# Contributing to rmqtt
 
 Thanks for your interest in contributing to this project! Whether it's fixing a bug, adding a feature, improving
  documentation, or asking a question — you're welcome here.
